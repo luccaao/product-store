@@ -1,31 +1,24 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ProductsService } from '../../services/products.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProductsService } from '../../services/products.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-product',
+  selector: 'app-edit-product',
   standalone: true,
   imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButton],
-  templateUrl: './create-product.component.html',
-  styleUrl: './create-product.component.css',
+  templateUrl: './edit-product.component.html',
+  styleUrl: './edit-product.component.css'
 })
-export class CreateProductComponent {
-  productsService = inject(ProductsService);
+export class EditProductComponent {
 
   MatSnackBar = inject(MatSnackBar);
+  productsService = inject(ProductsService);
   router = inject(Router);
-
-
 
   form = new FormGroup({
     name: new FormControl<string>('', {
@@ -37,8 +30,6 @@ export class CreateProductComponent {
       validators: [Validators.required],
     }),
   });
-
-  
 
   onSubmit() {
     if (this.form.invalid) {
@@ -52,7 +43,7 @@ export class CreateProductComponent {
     
 
     this.productsService
-      .post({
+      .patch(id {
         name: this.form.controls.name.value,
         price: this.form.controls.price.value,
       })
@@ -65,4 +56,6 @@ export class CreateProductComponent {
         this.router.navigate(['']);
       });
   }
+
+
 }

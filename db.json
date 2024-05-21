@@ -1,10 +1,29 @@
 {
-    "products": [
-        {
-            "id": 1,
-            "name": "Product 1",
-            "price": 100
-        
-        }
-    ]
+  "products": [
+    {
+      "id": "1",
+      "name": "Product 1",
+      "price": 100
+    },
+    {
+      "id": "24ef",
+      "name": "Product 1",
+      "price": 100
+    },
+    {
+      "id": "b925",
+      "name": "MOUSE",
+      "price": "32"
+    },
+    {
+      "id": "a7ef",
+      "name": "MONITOR",
+      "price": "340"
+    },
+    {
+      "id": "96e1",
+      "name": "FONE",
+      "price": "120"
+    }
+  ]
 }
