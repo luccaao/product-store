@@ -14,17 +14,23 @@ export const routes: Routes = [
     },
     {
         path: "create-product",
-        component: CreateProductComponent
+        loadComponent: () => 
+            import('./features/create-product/create-product.component').then((m) => m.CreateProductComponent)
     },
     {
         path: "edit-product/:id",
         resolve: {
             product: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
                 const productsService = inject(ProductsService);
-                productsService.patch
-            } 
+
+               return productsService.get(route.paramMap.get('id') as string)
         },
-        component: EditProductComponent
+    },
+        loadComponent: () => 
+            import('./features/edit-product/edit-product.component').then((m) => m.EditProductComponent)
+            
+        
+    
     }
 
 ];

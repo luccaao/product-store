@@ -2,13 +2,13 @@
   "products": [
     {
       "id": "1",
-      "name": "Product 1",
-      "price": 100
+      "name": "editado",
+      "price": "21"
     },
     {
       "id": "24ef",
-      "name": "Product 1",
-      "price": 100
+      "name": "Mouse",
+      "price": "145"
     },
     {
       "id": "b925",
