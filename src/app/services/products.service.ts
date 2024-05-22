@@ -32,5 +32,9 @@ export class ProductsService {
     return this.httpClient.delete(`http://localhost:3000/products/${id}`);
   }
 
+  buyProduct(product: Product) {
+    return this.httpClient.post('http://localhost:3000/products/buy', product);
+  }
+
 
 }

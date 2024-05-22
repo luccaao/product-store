@@ -1,9 +1,16 @@
 <div class="action-container">
-    <a mat-raised-button color="primary" [routerLink]="['/create-product']">Criar produto</a>
+  <a mat-raised-button color="primary" [routerLink]="['/create-product']"
+    >Criar produto</a
+  >
 </div>
-    
-    <ul>
-      @for (product of products; track product.id) {
-        <app-card [product]="product" (edit)="onEdit(product)" (delete)="onDelete(product)"></app-card>
-    }
-    </ul>
+
+<ul>
+  @for (product of products; track product.id) {
+  <app-card
+    [product]="product"
+    (edit)="onEdit(product)"
+    (buy)="onBuy(product)"
+    (delete)="onDelete(product)"
+  ></app-card>
+  }
+</ul>

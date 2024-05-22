@@ -9,47 +9,9 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
-
-@Component({
-  selector: 'app-confirmation-dialog',
-
-  template: `
-    <div class="container">
-      <div class="content-container">
-        <h2 mat-dialog-title>Deletar produto</h2>
-        <mat-dialog-content>
-          <p>Tem certeza que deseja deletar o produto?</p>
-        </mat-dialog-content>
-        <mat-dialog-actions align="end">
-          <button mat-button mat-dialog-close (click)="onNo()">Não</button>
-          <button
-            mat-raised-button
-            mat-dialog-close
-            cdkFocusInitial
-            color="warn"
-            (click)="onCofirm()"
-          >
-            Confirmar
-          </button>
-        </mat-dialog-actions>
-      </div>
-    </div>
-  `,
-
-  standalone: true,
-  imports: [MatButtonModule, MatDialogModule],
-})
-export class ConfirmationDialogComponent {
-  matDialogRef = inject(MatDialogRef);
-
-  onNo() {
-    this.matDialogRef.close(false);
-  }
-
-  onCofirm() {
-    this.matDialogRef.close(true);
-  }
-}
+import { ConfirmationDialogService } from '../../services/confirmation-dialog.service';
+import { WallentServiceService } from '../../services/wallent-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-list',
@@ -61,9 +23,13 @@ export class ConfirmationDialogComponent {
 export class ListComponent {
   products: any[] = [];
 
+
+  MatSnackBar = inject(MatSnackBar);
+  walletService = inject(WallentServiceService);
   productsService = inject(ProductsService);
   router = inject(Router);
   matDialog = inject(MatDialog);
+  confirmationDialogService = inject(ConfirmationDialogService);
 
   ngOnInit() {
     this.productsService.getAllProducts().subscribe((products) => {
@@ -72,23 +38,30 @@ export class ListComponent {
   }
 
   onEdit(product: Product) {
-    this.router.navigate(['/edit-product', product.id]);
+     this.router.navigate(['/edit-product', product.id]);
+   
+    
   }
 
   onDelete(product: Product) {
-    this.matDialog
-      .open(ConfirmationDialogComponent, {
-        width: '400px',
-      })
-      .afterClosed()
-      .subscribe((answer: boolean) => {
-        if (answer) {
-          this.productsService.delete(product.id as string).subscribe(() => {
-            this.productsService.getAllProducts().subscribe((products) => {
-              this.products = products;
-            });
+    this.confirmationDialogService.openDialog().subscribe((answer) => {
+      if (answer) {
+        this.productsService.delete(product.id as string).subscribe(() => {
+          this.productsService.getAllProducts().subscribe((products) => {
+            this.products = products;
           });
-        }
-      });
+        });
+      }
+    });
+  }
+
+  onBuy(product: Product) {
+    this.MatSnackBar.open('Produto comprado com sucesso!', ' Close')
+    console.log(product);
+    this.walletService.debit(product)
+    this.walletService.getWallet();
+
+    
+    
   }
 }
