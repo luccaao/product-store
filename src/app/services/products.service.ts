@@ -7,6 +7,7 @@ import { ProductPayload } from '../interfaces/payload-product.interface';
   providedIn: 'root',
 })
 export class ProductsService {
+  
   httpClient = inject(HttpClient);
 
   constructor() {}
@@ -25,6 +26,10 @@ export class ProductsService {
 
   patch(id:string, payload: ProductPayload) {
     return this.httpClient.patch(`http://localhost:3000/products/${id}`, payload);
+  }
+
+  delete(id: string) {
+    return this.httpClient.delete(`http://localhost:3000/products/${id}`);
   }
 
 

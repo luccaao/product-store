@@ -1,29 +1,49 @@
 {
   "products": [
     {
-      "id": "1",
-      "name": "editado",
-      "price": "21"
+      "id": "9754"
     },
     {
-      "id": "24ef",
-      "name": "Mouse",
-      "price": "145"
-    },
-    {
-      "id": "b925",
-      "name": "MOUSE",
+      "id": "95f2",
+      "name": "testando",
       "price": "32"
     },
     {
-      "id": "a7ef",
-      "name": "MONITOR",
-      "price": "340"
+      "id": "84f5",
+      "isTrusted": true
     },
     {
-      "id": "96e1",
-      "name": "FONE",
-      "price": "120"
+      "id": "fded",
+      "name": "32",
+      "price": "32"
+    },
+    {
+      "id": "421a",
+      "isTrusted": true
+    },
+    {
+      "id": "a6cd",
+      "name": "testeeee",
+      "price": "32"
+    },
+    {
+      "id": "1c16",
+      "isTrusted": true
+    },
+    {
+      "id": "1821",
+      "isTrusted": true
+    },
+    {
+      "id": "f6c9",
+      "isTrusted": true,
+      "name": "11111",
+      "price": 0
+    },
+    {
+      "id": "e958",
+      "name": "lucas",
+      "price": "32222332"
     }
   ]
 }

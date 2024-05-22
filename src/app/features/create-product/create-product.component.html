@@ -1,20 +1,3 @@
 
   <h2>Crie seu produto!</h2>
-  
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
-    
-    <div class="form-content">
-        <mat-form-field color="accent">
-            <mat-label>Nome do produto</mat-label>
-            <input matInput type="text" formControlName="name" placeholder="">
-          </mat-form-field>
-        <mat-form-field color="accent">
-            <mat-label>Preço do produto</mat-label>
-            <input matInput type="text" formControlName="price" placeholder="">
-          </mat-form-field>
-    
-          <button   mat-raised-button color="primary"  type="submit">Salvar</button>
-    
-    
-        </div>
-    </form>
+  <app-form (done)="onSubmit($event)"></app-form>

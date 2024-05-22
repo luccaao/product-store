@@ -5,18 +5,17 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductsService } from '../../services/products.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../interfaces/product.interface';
+import { FormComponent } from '../../components/form/form.component';
 
 @Component({
   selector: 'app-edit-product',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButton],
+  imports: [FormComponent],
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.css',
 })
@@ -27,31 +26,14 @@ export class EditProductComponent {
 
   product: Product = inject(ActivatedRoute).snapshot.data['product'];
 
-  form = new FormGroup({
-    name: new FormControl<string>(this.product.name , {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    price: new FormControl<number>(this.product.price, {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-  });
 
-  onSubmit() {
-    if (this.form.invalid) {
-      this.MatSnackBar.open('Preencha todos os campos!', 'OK', {
-        duration: 2000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-      });
-      return;
-    }
+  onSubmit(product: Product) {
+    
 
     this.productsService
       .patch(this.product.id as string, {
-        name: this.form.controls.name.value,
-        price: this.form.controls.price.value,
+        name: product.name,
+        price: product.price
       })
       .subscribe(() => {
         this.MatSnackBar.open('Produto editado com sucesso!', 'OK', {

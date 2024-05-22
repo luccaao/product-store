@@ -6,6 +6,6 @@
     </mat-card-header>
     <mat-card-actions>
       <button  (click)="edit.emit()"  mat-button>EDITAR</button>
-      <button mat-button>EXCLUIR</button>
+      <button mat-button (click)="onDelete()">EXCLUIR</button>
     </mat-card-actions>
   </mat-card>
